@@ -12,9 +12,9 @@
 #ifndef hifi_AnimationCache_h
 #define hifi_AnimationCache_h
 
-#include <QRunnable>
-#include <QScriptEngine>
-#include <QScriptValue>
+#include <QtCore/QRunnable>
+#include <QtScript/QScriptEngine>
+#include <QtScript/QScriptValue>
 
 #include <DependencyManager.h>
 #include <FBXReader.h>
@@ -97,7 +97,7 @@ class AnimationDetails {
 public:
     AnimationDetails();
     AnimationDetails(QString role, QUrl url, float fps, float priority, bool loop,
-        bool hold, bool startAutomatically, float firstFrame, float lastFrame, bool running, float frameIndex);
+        bool hold, bool startAutomatically, float firstFrame, float lastFrame, bool running, float currentFrame);
 
     QString role;
     QUrl url;
@@ -109,7 +109,7 @@ public:
     float firstFrame;
     float lastFrame;
     bool running;
-    float frameIndex;
+    float currentFrame;
 };
 Q_DECLARE_METATYPE(AnimationDetails);
 QScriptValue animationDetailsToScriptValue(QScriptEngine* engine, const AnimationDetails& event);

@@ -109,9 +109,9 @@ void VrMenu::addMenu(QMenu* menu) {
     }
     QVariant returnedValue;
     bool invokeResult = QMetaObject::invokeMethod(this, "addMenu", Qt::DirectConnection,
-        Q_RETURN_ARG(QVariant, returnedValue),
-        Q_ARG(QVariant, QVariant::fromValue(qmlParent)),
-        Q_ARG(QVariant, QVariant::fromValue(menu->title())));
+                                                  Q_RETURN_ARG(QVariant, returnedValue),
+                                                  Q_ARG(QVariant, QVariant::fromValue(qmlParent)),
+                                                  Q_ARG(QVariant, QVariant::fromValue(menu->title())));
     Q_ASSERT(invokeResult);
     QObject* result = returnedValue.value<QObject*>();
     Q_ASSERT(result);
@@ -146,11 +146,12 @@ void VrMenu::addAction(QMenu* menu, QAction* action) {
     MenuUserData* userData = MenuUserData::forObject(menu);
     QObject* menuQml = findMenuObject(userData->uuid.toString());
     Q_ASSERT(menuQml);
-    QVariant returnedValue; 
+    QVariant returnedValue;
+    
     bool invokeResult = QMetaObject::invokeMethod(this, "addItem", Qt::DirectConnection,
-        Q_RETURN_ARG(QVariant, returnedValue),
-        Q_ARG(QVariant, QVariant::fromValue(menuQml)),
-        Q_ARG(QVariant, QVariant::fromValue(action->text())));
+                                                  Q_RETURN_ARG(QVariant, returnedValue),
+                                                  Q_ARG(QVariant, QVariant::fromValue(menuQml)),
+                                                  Q_ARG(QVariant, QVariant::fromValue(action->text())));
     Q_ASSERT(invokeResult);
     QObject* result = returnedValue.value<QObject*>();
     Q_ASSERT(result);
@@ -168,10 +169,10 @@ void VrMenu::insertAction(QAction* before, QAction* action) {
     QObject* menu = beforeQml->parent();
     QVariant returnedValue;
     bool invokeResult = QMetaObject::invokeMethod(this, "insertItem", Qt::DirectConnection,
-        Q_RETURN_ARG(QVariant, returnedValue),
-        Q_ARG(QVariant, QVariant::fromValue(menu)),
-        Q_ARG(QVariant, QVariant::fromValue(beforeQml)),
-        Q_ARG(QVariant, QVariant::fromValue(action->text())));
+                                                  Q_RETURN_ARG(QVariant, returnedValue),
+                                                  Q_ARG(QVariant, QVariant::fromValue(menu)),
+                                                  Q_ARG(QVariant, QVariant::fromValue(beforeQml)),
+                                                  Q_ARG(QVariant, QVariant::fromValue(action->text())));
     Q_ASSERT(invokeResult);
     QObject* result = returnedValue.value<QObject*>();
     Q_ASSERT(result);
@@ -190,9 +191,5 @@ void VrMenu::removeAction(QAction* action) {
     bool invokeResult = QMetaObject::invokeMethod(this, "removeItem", Qt::DirectConnection,
         Q_ARG(QVariant, QVariant::fromValue(menu)),
         Q_ARG(QVariant, QVariant::fromValue(item)));
-#ifndef QT_NO_DEBUG
     Q_ASSERT(invokeResult);
-#else
-    Q_UNUSED(invokeResult);
-#endif
 }

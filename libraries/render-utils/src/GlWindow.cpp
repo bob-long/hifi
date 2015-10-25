@@ -45,6 +45,7 @@ bool GlWindow::makeCurrent() {
     
     QOpenGLContext * currentContext = QOpenGLContext::currentContext();
     Q_ASSERT(_context == currentContext);
+    
     return makeCurrentResult;
 }
 
